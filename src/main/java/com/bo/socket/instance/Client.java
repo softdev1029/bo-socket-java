@@ -27,8 +27,16 @@ public class Client {
     }
 
     public static void main(String[] args) {
+        if (args.length != 2) {
+            System.out.printf("usage: <host> <port>\n");
+            return;
+        }
+
         Client client = new Client();
-        client.runClient("127.0.0.1", 4444);
+
+        String ip = args[0];
+        int port = Integer.parseInt(args[1]);
+        client.runClient(ip, port);
     }
 
 }
