@@ -1,4 +1,4 @@
-package com.bo.socket.read;
+package com.bo.socket.instance;
 
 import java.net.*;
 import java.nio.charset.StandardCharsets;
