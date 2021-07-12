@@ -1,4 +1,4 @@
-package com.baeldung.socket.read;
+package com.bo.socket.read;
 
 import java.net.*;
 import java.nio.charset.StandardCharsets;
@@ -44,6 +44,11 @@ public class Server {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Server server = new Server();
+        server.runServer(4444);
     }
 
 }

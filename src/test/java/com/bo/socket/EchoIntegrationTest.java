@@ -1,4 +1,4 @@
-package com.baeldung.socket;
+package com.bo.socket;
 
 import static org.junit.Assert.assertEquals;
 

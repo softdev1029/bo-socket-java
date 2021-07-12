@@ -1,4 +1,4 @@
-package com.baeldung.socket.read;
+package com.bo.socket.read;
 
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
