@@ -32,6 +32,31 @@ public class ClientLogon extends Message {
             RiskMaster = Character.MIN_VALUE;
             
             out.writeChar(Data1);
+            out.writeChar(Data2);
+            out.writeShort(MessageLen);
+            out.writeShort(LogonType);
+            out.writeInt(Account);
+            for (int i = 0; i < TwoFA.length; i++) {
+                System.out.println(TwoFA[i]);
+                out.writeChar(TwoFA[i]);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void read(DataInputStream in) {
+        try {
+            LogonType = in.readShort();
+            Account = in.readInt();
+            for (int i = 0; i < TwoFA.length; i++) {
+                TwoFA[i] = in.readChar();
+            }
+
+            System.out.println("LogonType: " + LogonType);
+            System.out.println("Account: " + Account);
+            System.out.println("TwoFA: " + TwoFA);
         } catch (IOException e) {
             e.printStackTrace();
         }
