@@ -49,7 +49,7 @@ public class ServerController {
 
             if (dataType == MessageSymbol.CLIENT_LOGON) {
                 ClientLogon msg = new ClientLogon();
-                msg.read(in);
+                int error = msg.read(in);
                 msg.print();
             }
                

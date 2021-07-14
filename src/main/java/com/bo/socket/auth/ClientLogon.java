@@ -9,8 +9,7 @@ import java.util.*;
 
 import com.bo.socket.base.*;
 import com.bo.socket.auth.*;
-
-import com.bo.socket.base.Message;
+import com.bo.socket.constant.*;
 
 public class ClientLogon extends Message {
     public ClientLogon() {
@@ -72,49 +71,29 @@ public class ClientLogon extends Message {
         }
     }
 
-    public void read(DataInputStream in) {
-        try {
-            int headerLen = 4;
-            int needRead = MessageLen - headerLen;
-            ByteBuffer byteBuffer = ByteBuffer.allocate(needRead);
-            int alreadyRead = 0;
-            while (in.available() > 0 && alreadyRead != needRead) {
-                byteBuffer.put((byte) in.read());
-                alreadyRead++;
-            }
-
-            System.out.printf("Received %s message, need %s bytes, read %s bytes.",
-                MessageTypeStr,
-                MessageLen,
-                alreadyRead + headerLen);
-            printBuffer(byteBuffer);
-            System.out.println("");
-
-            if (needRead != alreadyRead) {
-                System.out.println("Invalid read length");
-                return;
-            }
-
-            byteBuffer.position(0);
-            
-            LogonType = byteBuffer.getShort();
-            Account = byteBuffer.getInt();
-            byteBuffer.get(TwoFA);
-            byteBuffer.get(UserName);
-            TradingSessionID = byteBuffer.getInt();
-            byteBuffer.get(PrimaryOrderEntryIP);
-            byteBuffer.get(SecondaryOrderEntryIP);
-            byteBuffer.get(PrimaryMarketDataIP);
-            byteBuffer.get(SecondaryMarketDataIP);
-            byteBuffer.get(SendingTime);
-            MsgSeqNum = byteBuffer.getInt();
-            Key = byteBuffer.getInt();
-            LoginStatus = byteBuffer.getShort();
-            RejectReason = byteBuffer.getShort();
-            RiskMaster = byteBuffer.get();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public int read(DataInputStream in) {
+        int error = super.read(in);
+        if (error != ReadError.NO_ERROR) {
+            return error;
         }
+
+        LogonType = byteBuffer.getShort();
+        Account = byteBuffer.getInt();
+        byteBuffer.get(TwoFA);
+        byteBuffer.get(UserName);
+        TradingSessionID = byteBuffer.getInt();
+        byteBuffer.get(PrimaryOrderEntryIP);
+        byteBuffer.get(SecondaryOrderEntryIP);
+        byteBuffer.get(PrimaryMarketDataIP);
+        byteBuffer.get(SecondaryMarketDataIP);
+        byteBuffer.get(SendingTime);
+        MsgSeqNum = byteBuffer.getInt();
+        Key = byteBuffer.getInt();
+        LoginStatus = byteBuffer.getShort();
+        RejectReason = byteBuffer.getShort();
+        RiskMaster = byteBuffer.get();
+
+        return ReadError.NO_ERROR;
     }
 
     public void print() {

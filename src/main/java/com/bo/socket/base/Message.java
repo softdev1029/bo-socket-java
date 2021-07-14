@@ -7,7 +7,12 @@ import java.nio.*;
 import java.nio.charset.*;
 import java.util.*;
 
+import com.bo.socket.constant.*;
+
 abstract public class Message {
+    protected ByteBuffer byteBuffer = null;
+
+    protected int HEADER_LEN = 4;
     protected String MessageTypeStr = "";
 
     public byte Data1 = 0;
@@ -63,7 +68,36 @@ abstract public class Message {
     public byte RiskMaster = 0;
 
     abstract public void send(DataOutputStream out);
-    abstract public void read(DataInputStream in);
+    public int read(DataInputStream in) {
+        try {
+            int needRead = MessageLen - HEADER_LEN;
+            byteBuffer = ByteBuffer.allocate(needRead);
+            int alreadyRead = 0;
+            while (in.available() > 0 && alreadyRead != needRead) {
+                byteBuffer.put((byte) in.read());
+                alreadyRead++;
+            }
+
+            System.out.printf("Received %s message, need %s bytes, read %s bytes.",
+                MessageTypeStr,
+                MessageLen,
+                alreadyRead + HEADER_LEN);
+            printBuffer(byteBuffer);
+            System.out.println("");
+
+            if (needRead != alreadyRead) {
+                System.out.println("Invalid read length");
+                return ReadError.INVALID_BUFFER_SIZE;
+            }
+
+            byteBuffer.position(0);
+            return ReadError.NO_ERROR;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ReadError.UNKNOWN_ERROR;
+        }
+    }
+
     abstract public void print();
 
     protected byte[] toBytes(char[] chars) {
