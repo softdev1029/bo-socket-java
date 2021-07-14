@@ -3,14 +3,15 @@ package com.bo.socket.base;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.io.*;
+import java.nio.*;
+import java.nio.charset.*;
+import java.util.*;
 
-public class Message {
-    public void send(DataOutputStream out) {
+abstract public class Message {
+    protected String MessageTypeStr = "";
 
-    }
-
-    public char Data1 = Character.MIN_VALUE;
-    public char Data2 = Character.MIN_VALUE;
+    public byte Data1 = 0;
+    public byte Data2 = 0;
     public short MessageLen = 0;
     public short MessageType = 0;
     public short Padding = 0;
@@ -51,7 +52,7 @@ public class Message {
     public char[] Attributes = new char[12];
 
     public short LogonType = 0;
-    public char[] TwoFA = new char[6];
+    public byte[] TwoFA = new byte[6];
     public char[] UserName = new char[6];
     public char[] PrimaryOrderEntryIP = new char[24];
     public char[] SecondaryOrderEntryIP = new char[24];
@@ -60,4 +61,38 @@ public class Message {
     public int LastSeqNum = 0;
     public short LoginStatus = 0;
     public char RiskMaster = 0;
+
+    abstract public void send(DataOutputStream out);
+    abstract public void read(DataInputStream in);
+    abstract public void print();
+
+    protected byte[] toBytes(char[] chars) {
+        CharBuffer charBuffer = CharBuffer.wrap(chars);
+        ByteBuffer byteBuffer = Charset.forName("UTF-8").encode(charBuffer);
+        byte[] bytes = Arrays.copyOfRange(byteBuffer.array(),
+                  byteBuffer.position(), byteBuffer.limit());
+        Arrays.fill(byteBuffer.array(), (byte) 0); // clear sensitive data
+        return bytes;
+    }
+
+    protected char[] getChars(ByteBuffer buffer, int len) {
+        byte[] bytes = new byte[len];
+        buffer.get(bytes);
+        String str = new String(bytes);
+        return str.toCharArray();
+    }
+
+    protected void printBytes(byte[] bytes) {
+        for (byte b : bytes) {
+            String st = String.format("%02X", b);
+            System.out.print(st);
+        }
+    }
+
+    protected void printBuffer(ByteBuffer buffer) {
+        buffer.position(0);
+        byte[] bytes = new byte[buffer.remaining()];
+        buffer.get(bytes);
+        printBytes(bytes);
+    }
 }

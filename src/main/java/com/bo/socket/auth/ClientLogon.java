@@ -3,6 +3,9 @@ package com.bo.socket.auth;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.io.*;
+import java.nio.*;
+import java.nio.channels.*;
+import java.util.*;
 
 import com.bo.socket.base.*;
 import com.bo.socket.auth.*;
@@ -10,14 +13,18 @@ import com.bo.socket.auth.*;
 import com.bo.socket.base.Message;
 
 public class ClientLogon extends Message {
+    public ClientLogon() {
+        MessageTypeStr = "ClientLogon";
+        MessageLen = 143;
+    }
+
     public void send(DataOutputStream out) {
         try {
             Data1 = 'H';
-            Data2 = Character.MIN_VALUE;
-            MessageLen = 143;
+            Data2 = 0;
             LogonType = 1;
             Account = 100700;
-            TwoFA = "1F6A".toCharArray();
+            TwoFA = "1F6A".getBytes();
             UserName = "BOU7".toCharArray();
             TradingSessionID = 506;
             PrimaryOrderEntryIP = "1".toCharArray();
@@ -31,16 +38,24 @@ public class ClientLogon extends Message {
             RejectReason = 0;
             RiskMaster = Character.MIN_VALUE;
             
-            out.writeChar(Data1);
-            out.writeChar(Data2);
-            out.writeShort(MessageLen);
-            out.writeShort(LogonType);
-            out.writeInt(Account);
-            for (int i = 0; i < TwoFA.length; i++) {
-                System.out.println(TwoFA[i]);
-                out.writeChar(TwoFA[i]);
-            }
+            ByteBuffer buffer = ByteBuffer.allocate(MessageLen);
+            buffer.put(Data1)
+                .put(Data2)
+                .putShort(MessageLen)
+                .putShort(LogonType)
+                .putInt(Account)
+                .put(TwoFA).position(16)
+                .put(toBytes(UserName)).position(22);
 
+            buffer.position(0);
+            WritableByteChannel channel = Channels.newChannel(out);
+            channel.write(buffer);
+
+            System.out.printf("Sending %s message, %s bytes ...",
+                MessageTypeStr,
+                MessageLen);
+            printBuffer(buffer);
+            System.out.println("");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,17 +63,30 @@ public class ClientLogon extends Message {
 
     public void read(DataInputStream in) {
         try {
-            LogonType = in.readShort();
-            Account = in.readInt();
-            for (int i = 0; i < TwoFA.length; i++) {
-                TwoFA[i] = in.readChar();
+            ByteBuffer byteBuffer = ByteBuffer.allocate(MessageLen - 4);
+            while (in.available() > 0) {
+                byteBuffer.put((byte) in.read());
             }
 
-            System.out.println("LogonType: " + LogonType);
-            System.out.println("Account: " + Account);
-            System.out.println("TwoFA: " + TwoFA);
+            System.out.printf("Received %s message, %s bytes ...",
+                MessageTypeStr,
+                MessageLen);
+            printBuffer(byteBuffer);
+            System.out.println("");
+
+            byteBuffer.position(0);
+            
+            LogonType = byteBuffer.getShort();
+            Account = byteBuffer.getInt();
+            byteBuffer.get(TwoFA);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void print() {
+        System.out.println("LogonType: " + LogonType);
+        System.out.println("Account: " + Account);
+        System.out.println("TwoFA: " + new String(TwoFA));
     }
 }
