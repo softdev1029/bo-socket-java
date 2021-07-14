@@ -15,6 +15,8 @@ public class Client {
 
         ClientLogon msg = new ClientLogon();
         sc.send(msg);
+        sc.send(msg);
+        sc.send(msg);
     }
 
     public static void main(String[] args) {

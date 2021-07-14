@@ -12,7 +12,12 @@ public class Server {
     public void runServer(int port) {
         ServerController sc = new ServerController();
         sc.create(port);
-        sc.read();
+        while (true) {
+            while (sc.isReadable()) {
+                System.out.println("1111===");
+                sc.read();
+            }
+        }
     }
 
     public static void main(String[] args) {

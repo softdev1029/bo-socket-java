@@ -74,16 +74,26 @@ public class ClientLogon extends Message {
 
     public void read(DataInputStream in) {
         try {
-            ByteBuffer byteBuffer = ByteBuffer.allocate(MessageLen - 4);
-            while (in.available() > 0) {
+            int headerLen = 4;
+            int needRead = MessageLen - headerLen;
+            ByteBuffer byteBuffer = ByteBuffer.allocate(needRead);
+            int alreadyRead = 0;
+            while (in.available() > 0 && alreadyRead != needRead) {
                 byteBuffer.put((byte) in.read());
+                alreadyRead++;
             }
 
-            System.out.printf("Received %s message, %s bytes ...",
+            System.out.printf("Received %s message, need %s bytes, read %s bytes.",
                 MessageTypeStr,
-                MessageLen);
+                MessageLen,
+                alreadyRead + headerLen);
             printBuffer(byteBuffer);
             System.out.println("");
+
+            if (needRead != alreadyRead) {
+                System.out.println("Invalid read length");
+                return;
+            }
 
             byteBuffer.position(0);
             

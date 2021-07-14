@@ -29,6 +29,15 @@ public class ServerController {
         }
     }
 
+    public boolean isReadable() {
+        try {
+            return in.available() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public void read() {
         try {
             // Read type and length of data
