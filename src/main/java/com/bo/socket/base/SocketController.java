@@ -6,6 +6,7 @@ import java.io.*;
 
 import com.bo.socket.base.*;
 import com.bo.socket.auth.*;
+import com.bo.socket.transaction.*;
 import com.bo.socket.constant.*;
 
 import com.bo.socket.base.Message;
@@ -45,11 +46,14 @@ public class SocketController {
             System.out.println("Type: " + dataType);
             System.out.println("Length:" + length);
 
+            Message msg = new ClientLogon();
             if (dataType == MessageSymbol.CLIENT_LOGON) {
-                ClientLogon msg = new ClientLogon();
-                int error = msg.read(in);
-                msg.print();
+                msg = new ClientLogon();
+            } else if (dataType == MessageSymbol.NEW_LIMIT_ORDER) {
+                msg = new NewLimitOrder();
             }
+            int error = msg.read(in);
+            msg.print();
                
         } catch (Exception e) {
             e.printStackTrace();

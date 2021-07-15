@@ -7,6 +7,7 @@ import java.util.*;
 
 import com.bo.socket.base.*;
 import com.bo.socket.auth.*;
+import com.bo.socket.transaction.*;
 import com.bo.socket.constant.*;
 import com.bo.socket.util.*;
 
@@ -36,11 +37,14 @@ public class Server {
                 System.out.println("Message type is: " + CreateMessage.REQUEST_MESSAGE_TYPES.get(msgTypeKey));
 
                 String msgCount = "1";
+                Message msg = new ClientLogon();
                 if (msgTypeKey.equals("H")) {
-                    ClientLogon msg = new ClientLogon();
-                    for (int i = 0; i < Integer.valueOf(msgCount); i++) {
-                        sc.send(msg);
-                    }
+                    msg = new ClientLogon();
+                } else if (msgTypeKey.equals("T")) {
+                    msg = new NewLimitOrder();
+                }
+                for (int i = 0; i < Integer.valueOf(msgCount); i++) {
+                    sc.send(msg);
                 }
             }
         }
