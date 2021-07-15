@@ -17,58 +17,46 @@ public class ClientLogon extends Message {
         MessageLen = 143;
     }
 
-    public void send(DataOutputStream out) {
-        try {
-            Data1 = 'H';
-            Data2 = 0;
-            LogonType = 1;
-            Account = 100700;
-            TwoFA = "1F6A".getBytes();
-            UserName = "BOU7".getBytes();
-            TradingSessionID = 506;
-            PrimaryOrderEntryIP = "1".getBytes();
-            SecondaryOrderEntryIP = "1".getBytes();
-            PrimaryMarketDataIP = "1".getBytes();
-            SecondaryMarketDataIP = "1".getBytes();
-            SendingTime = "".getBytes();
-            MsgSeqNum = 1500201;
-            Key = 432451;
-            LoginStatus = 0;
-            RejectReason = 0;
-            RiskMaster = 0;
-            
-            ByteBuffer buffer = ByteBuffer.allocate(MessageLen);
-            buffer.put(Data1)
-                .put(Data2)
-                .putShort(MessageLen)
-                .putShort(LogonType)
-                .putInt(Account)
-                .put(TwoFA).position(16)
-                .put(UserName).position(22)
-                .putInt(TradingSessionID)
-                .put(PrimaryOrderEntryIP).position(50)
-                .put(SecondaryOrderEntryIP).position(74)
-                .put(PrimaryMarketDataIP).position(98)
-                .put(SecondaryMarketDataIP).position(122)
-                .put(SendingTime).position(130)
-                .putInt(MsgSeqNum)
-                .putInt(Key)
-                .putShort(LoginStatus)
-                .putShort(RejectReason)
-                .put(RiskMaster);
+    public void createExampleMessage() {
+        Data1 = 'H';
+        Data2 = 0;
+        LogonType = 1;
+        Account = 100700;
+        TwoFA = "1F6A".getBytes();
+        UserName = "BOU7".getBytes();
+        TradingSessionID = 506;
+        PrimaryOrderEntryIP = "1".getBytes();
+        SecondaryOrderEntryIP = "1".getBytes();
+        PrimaryMarketDataIP = "1".getBytes();
+        SecondaryMarketDataIP = "1".getBytes();
+        SendingTime = "".getBytes();
+        MsgSeqNum = 1500201;
+        Key = 432451;
+        LoginStatus = 0;
+        RejectReason = 0;
+        RiskMaster = 0;
+    }
 
-            buffer.position(0);
-            WritableByteChannel channel = Channels.newChannel(out);
-            channel.write(buffer);
-
-            System.out.printf("Sending %s message, %s bytes ...",
-                MessageTypeStr,
-                MessageLen);
-            printBuffer(buffer);
-            System.out.println("");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void makeByteBuffer() {
+        byteBuffer = ByteBuffer.allocate(MessageLen);
+        byteBuffer.put(Data1)
+            .put(Data2)
+            .putShort(MessageLen)
+            .putShort(LogonType)
+            .putInt(Account)
+            .put(TwoFA).position(16)
+            .put(UserName).position(22)
+            .putInt(TradingSessionID)
+            .put(PrimaryOrderEntryIP).position(50)
+            .put(SecondaryOrderEntryIP).position(74)
+            .put(PrimaryMarketDataIP).position(98)
+            .put(SecondaryMarketDataIP).position(122)
+            .put(SendingTime).position(130)
+            .putInt(MsgSeqNum)
+            .putInt(Key)
+            .putShort(LoginStatus)
+            .putShort(RejectReason)
+            .put(RiskMaster);
     }
 
     public int read(DataInputStream in) {

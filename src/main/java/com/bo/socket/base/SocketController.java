@@ -57,6 +57,9 @@ public class SocketController {
     }
 
     public void send(Message msg) {
+        msg.createExampleMessage();
+        msg.makeByteBuffer();
+        msg.print();
         msg.send(out);
     }
 }

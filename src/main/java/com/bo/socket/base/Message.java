@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.io.*;
 import java.nio.*;
 import java.nio.charset.*;
+import java.nio.channels.*;
 import java.util.*;
 
 import com.bo.socket.constant.*;
@@ -67,7 +68,25 @@ abstract public class Message {
     public short LoginStatus = 0;
     public byte RiskMaster = 0;
 
-    abstract public void send(DataOutputStream out);
+    abstract public void createExampleMessage();
+    abstract public void makeByteBuffer();
+
+    public void send(DataOutputStream out) {
+        try {
+            byteBuffer.position(0);
+            WritableByteChannel channel = Channels.newChannel(out);
+            channel.write(byteBuffer);
+
+            System.out.printf("Sending %s message, %s bytes ...",
+                MessageTypeStr,
+                MessageLen);
+            printBuffer(byteBuffer);
+            System.out.println("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int read(DataInputStream in) {
         try {
             int needRead = MessageLen - HEADER_LEN;
