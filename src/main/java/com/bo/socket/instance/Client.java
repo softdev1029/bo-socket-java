@@ -17,6 +17,10 @@ public class Client {
         sc.create(ip, port);
 
         while (true) {
+            while (sc.isReadable()) {
+                sc.read();
+            }
+            
             Scanner scanner = new Scanner(System.in);
             String msgTypeKey = "";
             while (!CreateMessage.isValidMessageType(msgTypeKey)) {

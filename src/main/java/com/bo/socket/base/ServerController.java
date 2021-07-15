@@ -10,11 +10,9 @@ import com.bo.socket.constant.*;
 
 import com.bo.socket.base.Message;
 
-public class ServerController {
+public class ServerController extends SocketController {
     private ServerSocket server = null;
-    DataInputStream in = null;
-    DataOutputStream out = null;
-
+    
     public void create(int port) {
         try {
             ServerSocket server = new ServerSocket(port);
@@ -27,38 +25,5 @@ public class ServerController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public boolean isReadable() {
-        try {
-            return in.available() > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public void read() {
-        try {
-            // Read type and length of data
-            byte dataType = in.readByte();
-            byte dataType2 = in.readByte();
-            int length = in.readShort();
-            System.out.println("Type: " + dataType);
-            System.out.println("Length:" + length);
-
-            if (dataType == MessageSymbol.CLIENT_LOGON) {
-                ClientLogon msg = new ClientLogon();
-                int error = msg.read(in);
-                msg.print();
-            }
-               
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void send(Message msg) {
-        msg.send(out);
     }
 }
