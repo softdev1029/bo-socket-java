@@ -54,6 +54,11 @@ public class SocketController {
             }
             int error = msg.read(in);
             msg.print();
+            var isValid = msg.validate();
+            System.out.println("Valid: " + isValid);
+            if (!isValid) {
+                msg.printRejectReason();
+            }
                
         } catch (Exception e) {
             e.printStackTrace();

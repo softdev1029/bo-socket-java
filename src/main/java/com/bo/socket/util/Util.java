@@ -12,4 +12,14 @@ public class Util {
         }
         return true;
     }
+
+    public static boolean shortArrayContains(short[] arr, short target) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] == target) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
