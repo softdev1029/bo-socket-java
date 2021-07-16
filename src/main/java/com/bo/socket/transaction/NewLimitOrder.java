@@ -42,7 +42,7 @@ public class NewLimitOrder extends Message {
         ExpirationDate = "".getBytes();
         TraderID = 0;
         RejectReason = 1;
-        SendingTime = "ABCD1234".getBytes();
+        SendingTime = 1000;
         TradingSessionID = 506;
         Key = 42341;
         DisplaySize = 0;
@@ -86,7 +86,7 @@ public class NewLimitOrder extends Message {
             .put(ExpirationDate).position(126)
             .putInt(TraderID)
             .putShort(RejectReason)
-            .put(SendingTime).position(142)
+            .putLong(SendingTime)
             .putInt(TradingSessionID)
             .putInt(Key)
             .putDouble(DisplaySize)
@@ -116,34 +116,34 @@ public class NewLimitOrder extends Message {
         SymbolEnum = byteBuffer.getShort();
         OrderType = byteBuffer.getShort();
         SymbolType = byteBuffer.getShort();
-        BOPrice = byteBuffer.getLong();
+        BOPrice = byteBuffer.getDouble();
         BOSide = byteBuffer.getShort();
-        BOOrderQty = byteBuffer.getLong();
+        BOOrderQty = byteBuffer.getDouble();
         TIF = byteBuffer.getShort();
         StopLimitPrice = byteBuffer.getLong();
         byteBuffer.get(BOSymbol);
         OrigOrderID = byteBuffer.getLong();
-        BOCancelShares = byteBuffer.getLong();
+        BOCancelShares = byteBuffer.getDouble();
         ExecID = byteBuffer.getLong();
-        ExecShares = byteBuffer.getLong();
-        RemainingQuantity = byteBuffer.getLong();
-        ExecFee = byteBuffer.getLong();
+        ExecShares = byteBuffer.getDouble();
+        RemainingQuantity = byteBuffer.getDouble();
+        ExecFee = byteBuffer.getDouble();
         byteBuffer.get(ExpirationDate);
         TraderID = byteBuffer.getInt();
         RejectReason = byteBuffer.getShort();
-        byteBuffer.get(SendingTime);
+        SendingTime = byteBuffer.getLong();
         TradingSessionID = byteBuffer.getInt();
         Key = byteBuffer.getInt();
-        DisplaySize = byteBuffer.getLong();
-        RefreshSize = byteBuffer.getLong();
+        DisplaySize = byteBuffer.getDouble();
+        RefreshSize = byteBuffer.getDouble();
         Layers = byteBuffer.getShort();
-        SizeIncrement = byteBuffer.getLong();
-        PriceIncrement = byteBuffer.getLong();
-        PriceOffset = byteBuffer.getLong();
-        BOOrigPrice = byteBuffer.getLong();
-        ExecPrice = byteBuffer.getLong();
+        SizeIncrement = byteBuffer.getDouble();
+        PriceIncrement = byteBuffer.getDouble();
+        PriceOffset = byteBuffer.getDouble();
+        BOOrigPrice = byteBuffer.getDouble();
+        ExecPrice = byteBuffer.getDouble();
         MsgSeqNum = byteBuffer.getInt();
-        TakeProfitPrice = byteBuffer.getLong();
+        TakeProfitPrice = byteBuffer.getDouble();
         TriggerType = byteBuffer.getShort();
         byteBuffer.get(Attributes);
 
@@ -173,7 +173,7 @@ public class NewLimitOrder extends Message {
         System.out.println("ExpirationDate: " + new String(ExpirationDate));
         System.out.println("TraderID: " + TraderID);
         System.out.println("RejectReason: " + RejectReason);
-        System.out.println("SendingTime: " + new String(SendingTime));
+        System.out.println("SendingTime: " + SendingTime);
         System.out.println("TradingSessionID: " + TradingSessionID);
         System.out.println("Key: " + Key);
         System.out.println("DisplaySize: " + DisplaySize);

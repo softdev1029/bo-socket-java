@@ -41,7 +41,7 @@ abstract public class Message {
     public byte[] ExpirationDate = new byte[12];
     public int TraderID = 0;
     public short RejectReason = 0;
-    public byte[] SendingTime = new byte[8];
+    public long SendingTime = 0;
     public int TradingSessionID = 0;
     public int Key = 0;
     public double DisplaySize = 0;
