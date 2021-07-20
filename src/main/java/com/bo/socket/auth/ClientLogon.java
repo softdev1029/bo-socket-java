@@ -29,7 +29,7 @@ public class ClientLogon extends Message {
         SecondaryOrderEntryIP = "1".getBytes();
         PrimaryMarketDataIP = "1".getBytes();
         SecondaryMarketDataIP = "1".getBytes();
-        SendingTime = "".getBytes();
+        SendingTime = 0;
         MsgSeqNum = 1500201;
         Key = 432451;
         LoginStatus = 0;
@@ -51,7 +51,7 @@ public class ClientLogon extends Message {
             .put(SecondaryOrderEntryIP).position(74)
             .put(PrimaryMarketDataIP).position(98)
             .put(SecondaryMarketDataIP).position(122)
-            .put(SendingTime).position(130)
+            .putLong(SendingTime)
             .putInt(MsgSeqNum)
             .putInt(Key)
             .putShort(LoginStatus)
@@ -74,7 +74,7 @@ public class ClientLogon extends Message {
         byteBuffer.get(SecondaryOrderEntryIP);
         byteBuffer.get(PrimaryMarketDataIP);
         byteBuffer.get(SecondaryMarketDataIP);
-        byteBuffer.get(SendingTime);
+        SendingTime = byteBuffer.getLong();
         MsgSeqNum = byteBuffer.getInt();
         Key = byteBuffer.getInt();
         LoginStatus = byteBuffer.getShort();
@@ -94,7 +94,7 @@ public class ClientLogon extends Message {
         System.out.println("SecondaryOrderEntryIP: " + new String(SecondaryOrderEntryIP));
         System.out.println("PrimaryMarketDataIP: " + new String(PrimaryMarketDataIP));
         System.out.println("SecondaryMarketDataIP: " + new String(SecondaryMarketDataIP));
-        System.out.println("SendingTime: " + new String(SendingTime));
+        System.out.println("SendingTime: " + SendingTime);
         System.out.println("MsgSeqNum: " + MsgSeqNum);
         System.out.println("Key: " + Key);
         System.out.println("LoginStatus: " + LoginStatus);
