@@ -69,6 +69,10 @@ abstract public class Message {
     public short LoginStatus = 0;
     public byte RiskMaster = 0;
 
+    public short RequestType = 0;
+    public byte[] SymbolName = new byte[24];
+    public int RejectReason4Byte = 0;
+
     abstract public void createExampleMessage();
     abstract public void makeByteBuffer();
 

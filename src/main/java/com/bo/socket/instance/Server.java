@@ -42,6 +42,8 @@ public class Server {
                     msg = new ClientLogon();
                 } else if (msgTypeKey.equals("T")) {
                     msg = new NewLimitOrder();
+                } else if (msgTypeKey.equals("Y")) {
+                    msg = new InstrumentRequest();
                 }
                 for (int i = 0; i < Integer.valueOf(msgCount); i++) {
                     sc.send(msg);

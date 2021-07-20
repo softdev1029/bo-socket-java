@@ -51,6 +51,8 @@ public class SocketController {
                 msg = new ClientLogon();
             } else if (dataType == MessageSymbol.NEW_LIMIT_ORDER) {
                 msg = new NewLimitOrder();
+            } else if (dataType == MessageSymbol.INSTRUMENT_REQUEST) {
+                msg = new InstrumentRequest();
             }
             int error = msg.read(in);
             msg.print();
