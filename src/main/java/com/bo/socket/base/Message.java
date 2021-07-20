@@ -57,7 +57,7 @@ abstract public class Message {
     public double TakeProfitPrice = 0;
     public short TriggerType = 0;
     public byte[] Attributes = new byte[12];
-
+    
     public short LogonType = 0;
     public byte[] TwoFA = new byte[6];
     public byte[] UserName = new byte[6];
@@ -72,6 +72,8 @@ abstract public class Message {
     public short RequestType = 0;
     public byte[] SymbolName = new byte[24];
     public int RejectReason4Byte = 0;
+
+    public short ResponseType = 0;
 
     abstract public void createExampleMessage();
     abstract public void makeByteBuffer();

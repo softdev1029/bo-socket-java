@@ -16,6 +16,8 @@ public class SocketController {
     protected DataInputStream in = null;
     protected DataOutputStream out = null;
 
+    public void createServer(int port) {}
+
     public void create(String ip, int port) {
         try {
             socket = new Socket(ip, port);
@@ -53,6 +55,8 @@ public class SocketController {
                 msg = new NewLimitOrder();
             } else if (dataType == MessageSymbol.INSTRUMENT_REQUEST) {
                 msg = new InstrumentRequest();
+            } else if (dataType == MessageSymbol.RISK_UPDATE_REQUEST) {
+                msg = new RiskUpdateRequest();
             }
             int error = msg.read(in);
             msg.print();

@@ -13,7 +13,7 @@ import com.bo.socket.base.Message;
 public class ServerController extends SocketController {
     private ServerSocket server = null;
     
-    public void create(int port) {
+    public void createServer(int port) {
         try {
             ServerSocket server = new ServerSocket(port);
             System.out.println("Server Started. Waiting for connection ...");

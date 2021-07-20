@@ -11,54 +11,13 @@ import com.bo.socket.transaction.*;
 import com.bo.socket.constant.*;
 import com.bo.socket.util.*;
 
-public class Client {
+public class Client extends Instance {
     
     public void runClient(String ip, int port) {
-        SocketController sc = new SocketController();
+        sc = new SocketController();
         sc.create(ip, port);
 
-        while (true) {
-            while (sc.isReadable()) {
-                sc.read();
-            }
-            
-            Scanner scanner = new Scanner(System.in);
-            String msgTypeKey = "";
-            while (!CreateMessage.isValidMessageType(msgTypeKey)) {
-                CreateMessage.printAllRequestMessageTypes();
-
-                System.out.println("Enter a valid message type: ");
-        
-                msgTypeKey = scanner.nextLine();
-            }
-            
-            if (msgTypeKey.equals("0")) {
-                // receive from server
-            } else {
-                System.out.println("Message type is: " + CreateMessage.REQUEST_MESSAGE_TYPES.get(msgTypeKey));
-
-                String msgCount = null;
-                while (!Util.isNumeric(msgCount)) {
-                    System.out.println("Enter a valid count: ");
-            
-                    msgCount = scanner.nextLine();
-                }
-
-                System.out.println("Message count is: " + msgCount);
-
-                Message msg = new ClientLogon();
-                if (msgTypeKey.equals("H")) {
-                    msg = new ClientLogon();
-                } else if (msgTypeKey.equals("T")) {
-                    msg = new NewLimitOrder();
-                } else if (msgTypeKey.equals("Y")) {
-                    msg = new InstrumentRequest();
-                }
-                for (int i = 0; i < Integer.valueOf(msgCount); i++) {
-                    sc.send(msg);
-                }
-            }
-        }
+        super.runInstance();
     }
 
     public static void main(String[] args) {
