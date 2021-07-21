@@ -58,6 +58,7 @@ abstract public class Message {
     public short TriggerType = 0;
     public byte[] Attributes = new byte[12];
     
+    // Client Logon
     public short LogonType = 0;
     public byte[] TwoFA = new byte[6];
     public byte[] UserName = new byte[6];
@@ -69,11 +70,16 @@ abstract public class Message {
     public short LoginStatus = 0;
     public byte RiskMaster = 0;
 
+    // Instrument Request
     public short RequestType = 0;
     public byte[] SymbolName = new byte[24];
     public int RejectReason4Byte = 0;
 
+    // Risk Update Request
     public short ResponseType = 0;
+
+    // Collateral Request
+    public short UpdateType = 0;
 
     abstract public void createExampleMessage();
     abstract public void makeByteBuffer();

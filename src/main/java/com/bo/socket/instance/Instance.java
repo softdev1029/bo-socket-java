@@ -7,6 +7,7 @@ import java.util.*;
 
 import com.bo.socket.base.*;
 import com.bo.socket.auth.*;
+import com.bo.socket.trade.*;
 import com.bo.socket.transaction.*;
 import com.bo.socket.constant.*;
 import com.bo.socket.util.*;
@@ -53,6 +54,8 @@ public class Instance {
                 msg = new InstrumentRequest();
             } else if (msgTypeKey.equals("w")) {
                 msg = new RiskUpdateRequest();
+            } else if (msgTypeKey.equals("f")) {
+                msg = new CollateralRequest();
             }
             for (int i = 0; i < Integer.valueOf(msgCount); i++) {
                 sc.send(msg);

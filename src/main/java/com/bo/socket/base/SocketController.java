@@ -6,6 +6,7 @@ import java.io.*;
 
 import com.bo.socket.base.*;
 import com.bo.socket.auth.*;
+import com.bo.socket.trade.*;
 import com.bo.socket.transaction.*;
 import com.bo.socket.constant.*;
 
@@ -57,6 +58,8 @@ public class SocketController {
                 msg = new InstrumentRequest();
             } else if (dataType == MessageSymbol.RISK_UPDATE_REQUEST) {
                 msg = new RiskUpdateRequest();
+            } else if (dataType == MessageSymbol.COLLATERAL_REQUEST) {
+                msg = new CollateralRequest();
             }
             int error = msg.read(in);
             msg.print();

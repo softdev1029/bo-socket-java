@@ -5,4 +5,5 @@ public class MessageSymbol {
     public static byte NEW_LIMIT_ORDER = 'T';
     public static byte INSTRUMENT_REQUEST = 'Y';
     public static byte RISK_UPDATE_REQUEST = 'w';
+    public static byte COLLATERAL_REQUEST = 'f';
 }

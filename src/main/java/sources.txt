@@ -9,6 +9,7 @@
 ./com/bo/socket/instance/Instance.java
 ./com/bo/socket/instance/Server.java
 ./com/bo/socket/instance/Client.java
+./com/bo/socket/trade/CollateralRequest.java
 ./com/bo/socket/transaction/NewLimitOrder.java
 ./com/bo/socket/constant/MessageTypes.java
 ./com/bo/socket/constant/MessageSymbol.java
