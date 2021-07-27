@@ -31,7 +31,8 @@ public class RiskUpdateRequest extends Message {
     }
 
     public void makeByteBuffer() {
-        byteBuffer = ByteBuffer.allocate(MessageLen);
+        super.makeByteBuffer();
+        
         byteBuffer.put(Data1)
             .put(Data2)
             .putShort(MessageLen)

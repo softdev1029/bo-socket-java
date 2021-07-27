@@ -82,7 +82,11 @@ abstract public class Message {
     public short UpdateType = 0;
 
     abstract public void createExampleMessage();
-    abstract public void makeByteBuffer();
+
+    public void makeByteBuffer() {
+        byteBuffer = ByteBuffer.allocate(MessageLen);
+        byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+    }
 
     public void send(DataOutputStream out) {
         try {
@@ -104,6 +108,7 @@ abstract public class Message {
         try {
             int needRead = MessageLen - HEADER_LEN;
             byteBuffer = ByteBuffer.allocate(needRead);
+            byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
             int alreadyRead = 0;
             while (in.available() > 0 && alreadyRead != needRead) {
                 byteBuffer.put((byte) in.read());
