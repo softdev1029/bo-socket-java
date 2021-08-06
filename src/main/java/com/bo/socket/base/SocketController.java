@@ -3,6 +3,7 @@ package com.bo.socket.base;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.io.*;
+import java.util.function.Function;
 
 import com.bo.socket.base.*;
 import com.bo.socket.auth.*;
@@ -16,16 +17,20 @@ public class SocketController {
     private Socket socket = null;
     protected DataInputStream in = null;
     protected DataOutputStream out = null;
+    protected Function<Message, String> recvCallback = null;
 
-    public void createServer(int port) {}
+    public void createServer(int port, Function<Message, String> callback) {}
 
-    public void create(String ip, int port) {
+    public void create(String ip, int port, Function<Message, String> callback) {
         try {
             socket = new Socket(ip, port);
             System.out.println("Connected to server ...");
 
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
+            System.out.println(in);
+            System.out.println(out);
+            recvCallback = callback;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -67,6 +72,8 @@ public class SocketController {
             System.out.println("Valid: " + isValid);
             if (!isValid) {
                 msg.printRejectReason();
+            } else {
+                recvCallback.apply(msg);
             }
                
         } catch (Exception e) {

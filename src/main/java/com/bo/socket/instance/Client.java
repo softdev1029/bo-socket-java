@@ -13,9 +13,13 @@ import com.bo.socket.util.*;
 
 public class Client extends Instance {
     
+    public String recvCallback(Message msg) {
+        return "";
+    }
+
     public void runClient(String ip, int port) {
         sc = new SocketController();
-        sc.create(ip, port);
+        sc.create(ip, port, this::recvCallback);
 
         super.runInstance();
     }

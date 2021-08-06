@@ -6,6 +6,7 @@
 ./com/bo/socket/auth/InstrumentRequest.java
 ./com/bo/socket/auth/ClientLogon.java
 ./com/bo/socket/auth/RiskUpdateRequest.java
+./com/bo/socket/instance/Example.java
 ./com/bo/socket/instance/Instance.java
 ./com/bo/socket/instance/Server.java
 ./com/bo/socket/instance/Client.java

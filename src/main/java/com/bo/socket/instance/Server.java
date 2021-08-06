@@ -12,12 +12,27 @@ import com.bo.socket.constant.*;
 import com.bo.socket.util.*;
 
 public class Server extends Instance {
+    String processState = "";
+
+    public String recvCallback(Message msg) {
+        processState = "send_logon_reply";
+        return "";
+    }
     
     public void runServer(int port) {
         sc = new ServerController();
-        sc.createServer(port);
+        sc.createServer(port, this::recvCallback);
         
-        super.runInstance();
+        while (true) {
+            while (sc.isReadable()) {
+                sc.read();
+            }
+            
+            if (processState == "send_logon_reply") {
+                Message msg = new ClientLogon();
+                sc.send(msg);
+            }
+        }
     }
 
     public static void main(String[] args) {
