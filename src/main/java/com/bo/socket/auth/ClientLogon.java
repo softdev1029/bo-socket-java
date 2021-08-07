@@ -86,20 +86,20 @@ public class ClientLogon extends Message {
     }
 
     public void print() {
-        System.out.println("LogonType: " + LogonType);
-        System.out.println("Account: " + Account);
-        System.out.println("TwoFA: " + new String(TwoFA));
-        System.out.println("UserName: " + new String(UserName));
-        System.out.println("TradingSessionID: " + TradingSessionID);
-        System.out.println("PrimaryOrderEntryIP: " + new String(PrimaryOrderEntryIP));
-        System.out.println("SecondaryOrderEntryIP: " + new String(SecondaryOrderEntryIP));
-        System.out.println("PrimaryMarketDataIP: " + new String(PrimaryMarketDataIP));
-        System.out.println("SecondaryMarketDataIP: " + new String(SecondaryMarketDataIP));
-        System.out.println("SendingTime: " + SendingTime);
-        System.out.println("MsgSeqNum: " + MsgSeqNum);
-        System.out.println("Key: " + Key);
-        System.out.println("LoginStatus: " + LoginStatus);
-        System.out.println("RejectReason: " + RejectReason);
-        System.out.println("RiskMaster: " + RiskMaster);
+        Logger.logln("LogonType: " + LogonType);
+        Logger.logln("Account: " + Account);
+        Logger.logln("TwoFA: " + new String(TwoFA));
+        Logger.logln("UserName: " + new String(UserName));
+        Logger.logln("TradingSessionID: " + TradingSessionID);
+        Logger.logln("PrimaryOrderEntryIP: " + new String(PrimaryOrderEntryIP));
+        Logger.logln("SecondaryOrderEntryIP: " + new String(SecondaryOrderEntryIP));
+        Logger.logln("PrimaryMarketDataIP: " + new String(PrimaryMarketDataIP));
+        Logger.logln("SecondaryMarketDataIP: " + new String(SecondaryMarketDataIP));
+        Logger.logln("SendingTime: " + SendingTime);
+        Logger.logln("MsgSeqNum: " + MsgSeqNum);
+        Logger.logln("Key: " + Key);
+        Logger.logln("LoginStatus: " + LoginStatus);
+        Logger.logln("RejectReason: " + RejectReason);
+        Logger.logln("RiskMaster: " + RiskMaster);
     }
 }

@@ -94,11 +94,11 @@ abstract public class Message {
             WritableByteChannel channel = Channels.newChannel(out);
             channel.write(byteBuffer);
 
-            System.out.printf("Sending %s message, %s bytes ...",
+            Logger.logf("Sending %s message, %s bytes ...",
                 MessageTypeStr,
                 MessageLen);
             printBuffer(byteBuffer);
-            System.out.println("");
+            Logger.logln("");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -115,15 +115,15 @@ abstract public class Message {
                 alreadyRead++;
             }
 
-            System.out.printf("Received %s message, need %s bytes, read %s bytes.",
+            Logger.logf("Received %s message, need %s bytes, read %s bytes.",
                 MessageTypeStr,
                 MessageLen,
                 alreadyRead + HEADER_LEN);
             printBuffer(byteBuffer);
-            System.out.println("");
+            Logger.logln("");
 
             if (needRead != alreadyRead) {
-                System.out.println("Invalid read length");
+                Logger.logln("Invalid read length");
                 return ReadError.INVALID_BUFFER_SIZE;
             }
 
@@ -156,7 +156,7 @@ abstract public class Message {
     protected void printBytes(byte[] bytes) {
         for (byte b : bytes) {
             String st = String.format("%02X", b);
-            System.out.print(st);
+            Logger.log(st);
         }
     }
 
@@ -437,7 +437,7 @@ abstract public class Message {
     }
 
     public void printRejectReason() {
-        System.out.println("Reject Code: " + RejectReason);
+        Logger.logln("Reject Code: " + RejectReason);
         var msg = "Reject Reason: ";
         if ( RejectReason == RejectCode.ORDER_NOT_FOUND ) {
             msg += "ORDER_NOT_FOUND";
@@ -574,6 +574,6 @@ abstract public class Message {
         } else {
             msg += "UNKNOWN_REJCT";
         }
-        System.out.println(msg);
+        Logger.logln(msg);
     }
 }

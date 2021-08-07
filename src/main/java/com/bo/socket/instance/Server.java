@@ -14,7 +14,17 @@ import com.bo.socket.util.*;
 public class Server extends Instance {
     String processState = "recv_logon";
 
+    public void println(String msg) {
+        System.out.println(msg);
+    }
+
+    public void printf(String msg, Object... args) {
+        System.out.printf(msg, args);
+    }
+
     public String recvCallback(Message msg) {
+        printf("Received message: type=%s, len=%d\n", msg.MessageTypeStr, msg.MessageLen);
+
         if (processState == "recv_logon") {
             processState = "send_logon_reply";
         } else if (processState == "recv_order") {
@@ -36,11 +46,13 @@ public class Server extends Instance {
                 Message msg = new ClientLogon();
                 createExampleLogonReply(msg);
                 sc.send(msg);
+                println("Sending logon reply ...");
                 processState = "recv_order";
             } else if (processState == "send_order_reply") {
                 Message msg = new NewLimitOrder();
                 createExampleOrderReply(msg);
                 sc.send(msg);
+                println("Sending order reply ...");
                 processState = "";
             } 
         }

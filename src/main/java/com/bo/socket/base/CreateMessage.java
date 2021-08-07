@@ -30,14 +30,14 @@ public class CreateMessage {
     }
 
     public static void printAllRequestMessageTypes() {
-        System.out.println();
-        System.out.println("0 - Go To Receive Mode");
+        Logger.logln();
+        Logger.logln("0 - Go To Receive Mode");
 
         for (String key : REQUEST_MESSAGE_TYPES.keySet()) {
-            System.out.printf("%s - %s", key, REQUEST_MESSAGE_TYPES.get(key));
-            System.out.println("");
+            Logger.logf("%s - %s", key, REQUEST_MESSAGE_TYPES.get(key));
+            Logger.logln("");
         }
 
-        System.out.println();
+        Logger.logln();
     }
 }

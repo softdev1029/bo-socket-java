@@ -14,20 +14,28 @@ import com.bo.socket.util.*;
 public class Example extends Instance {
     String processState = "send_logon";
 
+    public void println(String msg) {
+        System.out.println(msg);
+    }
+
+    public void printf(String msg, Object... args) {
+        System.out.printf(msg, args);
+    }
+
     public String recvCallback(Message msg) {
-        System.out.printf("Received message: len=%d", msg.MessageLen);
+        printf("Received message: type=%s, len=%d\n", msg.MessageTypeStr, msg.MessageLen);
         
         if (msg.MessageTypeStr == "ClientLogon") {
             if (msg.LoginStatus == 1) {
-                System.out.println("Logon success");
+                println("Logon success");
                 processState = "send_order";
             } else if (msg.LoginStatus == 2) {
-                System.out.println("Logon fail");
+                println("Logon fail");
                 processState = "exit";
             }
         } else if (msg.MessageTypeStr == "NewLimitOrder") {
             if (msg.MessageType == MessageTypes.ORDER_ACK) {
-                System.out.println("Order replied");
+                println("Order replied");
                 processState = "send_logout";
             }
         }
@@ -47,16 +55,19 @@ public class Example extends Instance {
                 Message msg = new ClientLogon();
                 createExampleLogon(msg);
                 sc.send(msg);
+                println("Sending logon ...");
                 processState = "recv_logon";
             } else if (processState == "send_order") {
                 Message msg = new NewLimitOrder();
                 createExampleOrder(msg);
                 sc.send(msg);
+                println("Sending order ...");
                 processState = "recv_order_reply";
             } else if (processState == "send_logout") {
                 Message msg = new ClientLogon();
                 createExampleLogout(msg);
                 sc.send(msg);
+                println("Sending logout ...");
                 processState = "exit";
             }
         }
@@ -146,7 +157,7 @@ public class Example extends Instance {
 
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.out.printf("usage: <host> <port>\n");
+            Logger.logf("usage: <host> <port>\n");
             return;
         }
 

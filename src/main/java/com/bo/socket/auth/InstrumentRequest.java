@@ -74,16 +74,16 @@ public class InstrumentRequest extends Message {
     }
 
     public void print() {
-        System.out.println("MessageType: " + MessageType);
-        System.out.println("RejectReason4Byte: " + RejectReason4Byte);
-        System.out.println("Account: " + Account);
-        System.out.println("RequestType: " + RequestType);
-        System.out.println("Key: " + Key);
-        System.out.println("SymbolName: " + new String(SymbolName));
-        System.out.println("SymbolType: " + SymbolType);
-        System.out.println("SymbolEnum: " + SymbolEnum);
-        System.out.println("TradingSessionID: " + TradingSessionID);
-        System.out.println("SendingTime: " + SendingTime);
-        System.out.println("MsgSeqNum: " + MsgSeqNum);
+        Logger.logln("MessageType: " + MessageType);
+        Logger.logln("RejectReason4Byte: " + RejectReason4Byte);
+        Logger.logln("Account: " + Account);
+        Logger.logln("RequestType: " + RequestType);
+        Logger.logln("Key: " + Key);
+        Logger.logln("SymbolName: " + new String(SymbolName));
+        Logger.logln("SymbolType: " + SymbolType);
+        Logger.logln("SymbolEnum: " + SymbolEnum);
+        Logger.logln("TradingSessionID: " + TradingSessionID);
+        Logger.logln("SendingTime: " + SendingTime);
+        Logger.logln("MsgSeqNum: " + MsgSeqNum);
     }
 }

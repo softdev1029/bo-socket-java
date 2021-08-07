@@ -66,13 +66,13 @@ public class CollateralRequest extends Message {
     }
 
     public void print() {
-        System.out.println("MessageType: " + MessageType);
-        System.out.println("UpdateType: " + UpdateType);
-        System.out.println("Account: " + Account);
-        System.out.println("TradingSessionID: " + TradingSessionID);
-        System.out.println("SymbolEnum: " + SymbolEnum);
-        System.out.println("Key: " + Key);
-        System.out.println("MsgSeqNum: " + MsgSeqNum);
-        System.out.println("SendingTime: " + SendingTime);
+        Logger.logln("MessageType: " + MessageType);
+        Logger.logln("UpdateType: " + UpdateType);
+        Logger.logln("Account: " + Account);
+        Logger.logln("TradingSessionID: " + TradingSessionID);
+        Logger.logln("SymbolEnum: " + SymbolEnum);
+        Logger.logln("Key: " + Key);
+        Logger.logln("MsgSeqNum: " + MsgSeqNum);
+        Logger.logln("SendingTime: " + SendingTime);
     }
 }

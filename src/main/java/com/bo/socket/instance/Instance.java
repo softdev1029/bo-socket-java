@@ -26,7 +26,7 @@ public class Instance {
         while (!CreateMessage.isValidMessageType(msgTypeKey)) {
             CreateMessage.printAllRequestMessageTypes();
 
-            System.out.println("Enter a valid message type: ");
+            Logger.logln("Enter a valid message type: ");
     
             msgTypeKey = scanner.nextLine();
         }
@@ -34,16 +34,16 @@ public class Instance {
         if (msgTypeKey.equals("0")) {
             // receive from server
         } else {
-            System.out.println("Message type is: " + CreateMessage.REQUEST_MESSAGE_TYPES.get(msgTypeKey));
+            Logger.logln("Message type is: " + CreateMessage.REQUEST_MESSAGE_TYPES.get(msgTypeKey));
 
             String msgCount = null;
             while (!Util.isNumeric(msgCount)) {
-                System.out.println("Enter a valid count: ");
+                Logger.logln("Enter a valid count: ");
         
                 msgCount = scanner.nextLine();
             }
 
-            System.out.println("Message count is: " + msgCount);
+            Logger.logln("Message count is: " + msgCount);
 
             Message msg = new ClientLogon();
             if (msgTypeKey.equals("H")) {

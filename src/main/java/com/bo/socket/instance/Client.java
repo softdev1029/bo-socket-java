@@ -26,7 +26,7 @@ public class Client extends Instance {
 
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.out.printf("usage: <host> <port>\n");
+            Logger.logf("usage: <host> <port>\n");
             return;
         }
 

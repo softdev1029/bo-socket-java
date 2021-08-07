@@ -24,7 +24,7 @@ public class SocketController {
     public void create(String ip, int port, Function<Message, String> callback) {
         try {
             socket = new Socket(ip, port);
-            System.out.println("Connected to server ...");
+            Logger.logln("Connected to server ...");
 
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
@@ -49,8 +49,8 @@ public class SocketController {
             byte dataType = in.readByte();
             byte dataType2 = in.readByte();
             int length = in.readShort();
-            System.out.println("Type: " + dataType);
-            System.out.println("Length:" + length);
+            Logger.logln("Type: " + dataType);
+            Logger.logln("Length:" + length);
 
             Message msg = new ClientLogon();
             if (dataType == MessageSymbol.CLIENT_LOGON) {
@@ -67,7 +67,7 @@ public class SocketController {
             int error = msg.read(in);
             msg.print();
             var isValid = msg.validate();
-            System.out.println("Valid: " + isValid);
+            Logger.logln("Valid: " + isValid);
             if (!isValid) {
                 msg.printRejectReason();
             } else {
