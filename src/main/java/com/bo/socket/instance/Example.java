@@ -15,6 +15,22 @@ public class Example extends Instance {
     String processState = "send_logon";
 
     public String recvCallback(Message msg) {
+        System.out.printf("Received message: len=%d", msg.MessageLen);
+        
+        if (msg.MessageTypeStr == "ClientLogon") {
+            if (msg.LoginStatus == 1) {
+                System.out.println("Logon success");
+                processState = "send_order";
+            } else if (msg.LoginStatus == 2) {
+                System.out.println("Logon fail");
+                processState = "exit";
+            }
+        } else if (msg.MessageTypeStr == "NewLimitOrder") {
+            if (msg.MessageType == MessageTypes.ORDER_ACK) {
+                System.out.println("Order replied");
+                processState = "send_logout";
+            }
+        }
         return "";
     }
 
@@ -22,22 +38,110 @@ public class Example extends Instance {
         sc = new SocketController();
         sc.create(ip, port, this::recvCallback);
 
-        // while (true) {
-        //     while (sc.isReadable()) {
-        //         sc.read();
-        //     }
+        while (true) {
+            while (sc.isReadable()) {
+                sc.read();
+            }
             
-        //     if (processState == "send_logon") {
-        //         Message msg = new ClientLogon();
-        //         sc.send(msg);
-        //     } else if (processState == "send_order") {
-        //         Message msg = new NewLimitOrder();
-        //         sc.send(msg);
-        //     } else if (processState == "send_logout") {
-        //         Message msg = new ClientLogon();
-        //         sc.send(msg);
-        //     }
-        // }
+            if (processState == "send_logon") {
+                Message msg = new ClientLogon();
+                createExampleLogon(msg);
+                sc.send(msg);
+                processState = "recv_logon";
+            } else if (processState == "send_order") {
+                Message msg = new NewLimitOrder();
+                createExampleOrder(msg);
+                sc.send(msg);
+                processState = "recv_order_reply";
+            } else if (processState == "send_logout") {
+                Message msg = new ClientLogon();
+                createExampleLogout(msg);
+                sc.send(msg);
+                processState = "exit";
+            }
+        }
+    }
+
+    public void createExampleLogon(Message msg) {
+        msg.Data1 = 'H';
+        msg.Data2 = 0;
+        msg.LogonType = 1; // logon
+        msg.Account = 100700;
+        msg.TwoFA = "1F6A".getBytes();
+        msg.UserName = "BOU7".getBytes();
+        msg.TradingSessionID = 506;
+        msg.PrimaryOrderEntryIP = "1".getBytes();
+        msg.SecondaryOrderEntryIP = "1".getBytes();
+        msg.PrimaryMarketDataIP = "1".getBytes();
+        msg.SecondaryMarketDataIP = "1".getBytes();
+        msg.SendingTime = 0;
+        msg.MsgSeqNum = 1500201;
+        msg.Key = 432451;
+        msg.LoginStatus = 0;
+        msg.RejectReason = 0;
+        msg.RiskMaster = 0;
+    }
+
+    public void createExampleLogout(Message msg) {
+        msg.Data1 = 'H';
+        msg.Data2 = 0;
+        msg.LogonType = 2; // logout
+        msg.Account = 100700;
+        msg.TwoFA = "1F6A".getBytes();
+        msg.UserName = "BOU7".getBytes();
+        msg.TradingSessionID = 506;
+        msg.PrimaryOrderEntryIP = "1".getBytes();
+        msg.SecondaryOrderEntryIP = "1".getBytes();
+        msg.PrimaryMarketDataIP = "1".getBytes();
+        msg.SecondaryMarketDataIP = "1".getBytes();
+        msg.SendingTime = 0;
+        msg.MsgSeqNum = 1500201;
+        msg.Key = 432451;
+        msg.LoginStatus = 0;
+        msg.RejectReason = 0;
+        msg.RiskMaster = 0;
+    }
+
+    public void createExampleOrder(Message msg) {
+        msg.Data1 = 'T';
+        msg.Data2 = 0;
+        msg.MessageType = 1; // ORDER_NEW
+        msg.Padding = 0;
+        msg.Account = 100700;
+        msg.OrderID = 46832151;
+        msg.SymbolEnum = 1;
+        msg.OrderType = 1; // LMT
+        msg.SymbolType = 1; // SPOT
+        msg.BOPrice = 50100.5;
+        msg.BOSide = 3; // BUY
+        msg.BOOrderQty = 2.0;
+        msg.TIF = 2; // GTC
+        msg.StopLimitPrice = 0;
+        msg.BOSymbol = "BTCUSD".getBytes();
+        msg.OrigOrderID = 0;
+        msg.BOCancelShares = 0;
+        msg.ExecID = 0;
+        msg.ExecShares = 0;
+        msg.RemainingQuantity = 0;
+        msg.ExecFee = 0;
+        msg.ExpirationDate = "".getBytes();
+        msg.TraderID = 0;
+        msg.RejectReason = 1;
+        msg.SendingTime = 1000;
+        msg.TradingSessionID = 506;
+        msg.Key = 42341;
+        msg.DisplaySize = 0;
+        msg.RefreshSize = 0;
+        msg.Layers = 0;
+        msg.SizeIncrement = 0;
+        msg.PriceIncrement = 0;
+        msg.PriceOffset = 0;
+        msg.BOOrigPrice = 0;
+        msg.ExecPrice = 0;
+        msg.MsgSeqNum = 79488880;
+        msg.TakeProfitPrice = 0;
+        msg.TriggerType = 0;
+        msg.Attributes = "".getBytes();
     }
 
     public static void main(String[] args) {

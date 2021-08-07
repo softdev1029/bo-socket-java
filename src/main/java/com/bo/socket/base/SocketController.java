@@ -28,8 +28,6 @@ public class SocketController {
 
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
-            System.out.println(in);
-            System.out.println(out);
             recvCallback = callback;
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,7 +80,7 @@ public class SocketController {
     }
 
     public void send(Message msg) {
-        msg.createExampleMessage();
+        // msg.createExampleMessage();
         msg.makeByteBuffer();
         msg.print();
         msg.send(out);

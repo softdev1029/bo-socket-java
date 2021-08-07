@@ -15,7 +15,7 @@ abstract public class Message {
     protected ByteBuffer byteBuffer = null;
 
     protected int HEADER_LEN = 4;
-    protected String MessageTypeStr = "";
+    public String MessageTypeStr = "";
 
     public byte Data1 = 0;
     public byte Data2 = 0;
