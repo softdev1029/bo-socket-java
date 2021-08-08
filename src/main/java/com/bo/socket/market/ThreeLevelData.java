@@ -11,14 +11,14 @@ import com.bo.socket.base.*;
 import com.bo.socket.auth.*;
 import com.bo.socket.constant.*;
 
-public class FiveLevelData extends Message {
-    public FiveLevelData() {
-        MessageTypeStr = "FiveLevelData";
-        MessageLen = 236;
+public class ThreeLevelData extends Message {
+    public ThreeLevelData() {
+        MessageTypeStr = "ThreeLevelData";
+        MessageLen = 164;
     }
 
     public void createExampleMessage() {
-        Data1 = 'm';
+        Data1 = 'M';
         Data2 = 0;
         MessageType = 1; // BUY
         Padding = 0;
@@ -53,22 +53,6 @@ public class FiveLevelData extends Message {
         Lvl3Price.SellPrice = 60000.5;
         Lvl3Price.SellVolume = 60000.5;
         Lvl3Price.NumSellOrders = 5;
-
-        // level4
-        Lvl4Price.BuyPrice = 60000.5;
-        Lvl4Price.BuyVolume = 60000.5;
-        Lvl4Price.NumBuyOrders = 5;
-        Lvl4Price.SellPrice = 60000.5;
-        Lvl4Price.SellVolume = 60000.5;
-        Lvl4Price.NumSellOrders = 5;
-
-        // level5
-        Lvl5Price.BuyPrice = 60000.5;
-        Lvl5Price.BuyVolume = 60000.5;
-        Lvl5Price.NumBuyOrders = 5;
-        Lvl5Price.SellPrice = 60000.5;
-        Lvl5Price.SellVolume = 60000.5;
-        Lvl5Price.NumSellOrders = 5;
     }
 
     public void makeByteBuffer() {
@@ -89,8 +73,6 @@ public class FiveLevelData extends Message {
         Lvl1Price.put(byteBuffer);
         Lvl2Price.put(byteBuffer);
         Lvl3Price.put(byteBuffer);
-        Lvl4Price.put(byteBuffer);
-        Lvl5Price.put(byteBuffer);
     }
 
     public int read(DataInputStream in) {
@@ -110,8 +92,6 @@ public class FiveLevelData extends Message {
         Lvl1Price.get(byteBuffer);
         Lvl2Price.get(byteBuffer);
         Lvl3Price.get(byteBuffer);
-        Lvl4Price.get(byteBuffer);
-        Lvl5Price.get(byteBuffer);
 
         return ReadError.NO_ERROR;
     }
@@ -129,7 +109,5 @@ public class FiveLevelData extends Message {
         Lvl1Price.logln();
         Lvl2Price.logln();
         Lvl3Price.logln();
-        Lvl4Price.logln();
-        Lvl5Price.logln();
     }
 }

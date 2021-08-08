@@ -14,7 +14,8 @@ public class CreateMessage {
         REQUEST_MESSAGE_TYPES.put("E", RequestMessageTypes.MSG_OPEN_ORDER_REQUEST);
         REQUEST_MESSAGE_TYPES.put("f", RequestMessageTypes.MSG_COLLATERAL_REQUEST);
         REQUEST_MESSAGE_TYPES.put("T", RequestMessageTypes.MSG_NEW_LIMIT_ORDER);
-        REQUEST_MESSAGE_TYPES.put("M", RequestMessageTypes.MSG_FIVE_LEVEL_DATA);
+        REQUEST_MESSAGE_TYPES.put("M", RequestMessageTypes.MSG_THREE_LEVEL_DATA);
+        REQUEST_MESSAGE_TYPES.put("m", RequestMessageTypes.MSG_FIVE_LEVEL_DATA);
     }
 
     public static boolean isValidMessageType(String msgTypeKey) {
@@ -35,8 +36,7 @@ public class CreateMessage {
         Logger.logln("0 - Go To Receive Mode");
 
         for (String key : REQUEST_MESSAGE_TYPES.keySet()) {
-            Logger.logf("%s - %s", key, REQUEST_MESSAGE_TYPES.get(key));
-            Logger.logln("");
+            Logger.logf("%s - %s\n", key, REQUEST_MESSAGE_TYPES.get(key));
         }
 
         Logger.logln();

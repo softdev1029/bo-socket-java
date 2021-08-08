@@ -64,6 +64,8 @@ public class SocketController {
                 msg = new RiskUpdateRequest();
             } else if (dataType == MessageSymbol.COLLATERAL_REQUEST) {
                 msg = new CollateralRequest();
+            } else if (dataType == MessageSymbol.THREE_LEVEL_DATA) {
+                msg = new ThreeLevelData();
             } else if (dataType == MessageSymbol.FIVE_LEVEL_DATA) {
                 msg = new FiveLevelData();
             }

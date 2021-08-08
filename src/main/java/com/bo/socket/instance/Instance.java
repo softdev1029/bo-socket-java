@@ -58,6 +58,8 @@ public class Instance {
             } else if (msgTypeKey.equals("f")) {
                 msg = new CollateralRequest();
             } else if (msgTypeKey.equals("M")) {
+                msg = new ThreeLevelData();
+            } else if (msgTypeKey.equals("m")) {
                 msg = new FiveLevelData();
             }
             for (int i = 0; i < Integer.valueOf(msgCount); i++) {
