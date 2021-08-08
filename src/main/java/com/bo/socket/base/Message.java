@@ -101,7 +101,7 @@ abstract public class Message {
 
     // TenLevelData
     public short StartLayer = 0;
-    public AtomPrice[] Prices = new AtomPrice[20];
+    public AtomPrice[] Prices = null;
 
     abstract public void createExampleMessage();
 
