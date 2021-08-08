@@ -9,6 +9,7 @@ import com.bo.socket.base.*;
 import com.bo.socket.auth.*;
 import com.bo.socket.trade.*;
 import com.bo.socket.transaction.*;
+import com.bo.socket.market.*;
 import com.bo.socket.constant.*;
 import com.bo.socket.util.*;
 
@@ -56,8 +57,11 @@ public class Instance {
                 msg = new RiskUpdateRequest();
             } else if (msgTypeKey.equals("f")) {
                 msg = new CollateralRequest();
+            } else if (msgTypeKey.equals("M")) {
+                msg = new FiveLevelData();
             }
             for (int i = 0; i < Integer.valueOf(msgCount); i++) {
+                msg.createExampleMessage();
                 sc.send(msg);
             }
         }

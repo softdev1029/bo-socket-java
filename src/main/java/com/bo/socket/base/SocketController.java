@@ -9,6 +9,7 @@ import com.bo.socket.base.*;
 import com.bo.socket.auth.*;
 import com.bo.socket.trade.*;
 import com.bo.socket.transaction.*;
+import com.bo.socket.market.*;
 import com.bo.socket.constant.*;
 
 import com.bo.socket.base.Message;
@@ -63,6 +64,8 @@ public class SocketController {
                 msg = new RiskUpdateRequest();
             } else if (dataType == MessageSymbol.COLLATERAL_REQUEST) {
                 msg = new CollateralRequest();
+            } else if (dataType == MessageSymbol.FIVE_LEVEL_DATA) {
+                msg = new FiveLevelData();
             }
             int error = msg.read(in);
             msg.print();
@@ -80,7 +83,6 @@ public class SocketController {
     }
 
     public void send(Message msg) {
-        // msg.createExampleMessage();
         msg.makeByteBuffer();
         msg.print();
         msg.send(out);

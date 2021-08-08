@@ -1,7 +1,7 @@
 package com.bo.socket.base;
 
 public class Logger {
-    static boolean IS_LOGGING = false;
+    static boolean IS_LOGGING = true;
 
     public static void logf(String pattern, Object... arguments) {
         if (IS_LOGGING) {

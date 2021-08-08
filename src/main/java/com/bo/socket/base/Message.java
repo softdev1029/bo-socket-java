@@ -81,6 +81,18 @@ abstract public class Message {
     // Collateral Request
     public short UpdateType = 0;
 
+    // FiveLevelData
+    public byte[] MarketDataSymbolName = new byte[12];
+    public double LastTradePrice = 0;
+    public double Last24Vol = 0;
+    public double High = 0;
+    public double Low = 0;
+    public Price Lvl1Price = new Price();
+    public Price Lvl2Price = new Price();
+    public Price Lvl3Price = new Price();
+    public Price Lvl4Price = new Price();
+    public Price Lvl5Price = new Price();
+
     abstract public void createExampleMessage();
 
     public void makeByteBuffer() {

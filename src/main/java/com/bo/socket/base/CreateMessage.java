@@ -14,6 +14,7 @@ public class CreateMessage {
         REQUEST_MESSAGE_TYPES.put("E", RequestMessageTypes.MSG_OPEN_ORDER_REQUEST);
         REQUEST_MESSAGE_TYPES.put("f", RequestMessageTypes.MSG_COLLATERAL_REQUEST);
         REQUEST_MESSAGE_TYPES.put("T", RequestMessageTypes.MSG_NEW_LIMIT_ORDER);
+        REQUEST_MESSAGE_TYPES.put("M", RequestMessageTypes.MSG_FIVE_LEVEL_DATA);
     }
 
     public static boolean isValidMessageType(String msgTypeKey) {
