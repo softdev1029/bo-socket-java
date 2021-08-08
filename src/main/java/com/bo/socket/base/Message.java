@@ -81,6 +81,9 @@ abstract public class Message {
     // Collateral Request
     public short UpdateType = 0;
 
+    // MDSubscribe
+    public Subscribe[] Subscribes = new Subscribe[5];
+    
     // MDExecReport
     public double Volume = 0;
 

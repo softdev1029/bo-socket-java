@@ -14,7 +14,11 @@ import com.bo.socket.constant.*;
 public class MDSubscribe extends Message {
     public MDSubscribe() {
         MessageTypeStr = "MDSubscribe";
-        MessageLen = 32;
+        MessageLen = 147; // 32;
+
+        for (int i = 0; i < 5; i++) {
+            Subscribes[i] = new Subscribe();
+        }
     }
 
     public void createExampleMessage() {
@@ -27,6 +31,7 @@ public class MDSubscribe extends Message {
         TradingSessionID = 200;
         SendingTime = 1842320291;
         MsgSeqNum = 52488131;
+        // subscribes
     }
 
     public void makeByteBuffer() {
@@ -42,6 +47,11 @@ public class MDSubscribe extends Message {
             .putInt(TradingSessionID)
             .putLong(SendingTime)
             .putInt(MsgSeqNum);
+        int pos = 28;
+        for (int i = 0; i < 5; i++) {
+            Subscribes[i].put(byteBuffer, pos);
+            pos = pos + 23;
+        }
     }
 
     public int read(DataInputStream in) {
@@ -57,6 +67,9 @@ public class MDSubscribe extends Message {
         TradingSessionID = byteBuffer.getInt();
         SendingTime = byteBuffer.getLong();
         MsgSeqNum = byteBuffer.getInt();
+        for (int i = 0; i < 5; i++) {
+            Subscribes[i].get(byteBuffer);
+        }
 
         return ReadError.NO_ERROR;
     }
@@ -69,5 +82,8 @@ public class MDSubscribe extends Message {
         Logger.logln("TradingSessionID: " + TradingSessionID);
         Logger.logln("SendingTime: " + SendingTime);
         Logger.logln("MsgSeqNum: " + MsgSeqNum);
+        for (int i = 0; i < 5; i++) {
+            Subscribes[i].logln();
+        }
     }
 }
