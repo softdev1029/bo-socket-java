@@ -78,6 +78,8 @@ public class SocketController {
                 msg = new TenLevelData();
             } else if (dataType == MessageSymbol.TWENTY_LEVEL_DATA) {
                 msg = new TwentyLevelData();
+            } else if (dataType == MessageSymbol.THIRTY_LEVEL_DATA) {
+                msg = new ThirtyLevelData();
             }
             int error = msg.read(in);
             msg.print();

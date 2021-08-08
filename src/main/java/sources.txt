@@ -15,6 +15,7 @@
 ./com/bo/socket/instance/Server.java
 ./com/bo/socket/instance/Client.java
 ./com/bo/socket/trade/CollateralRequest.java
+./com/bo/socket/market/ThirtyLevelData.java
 ./com/bo/socket/market/TOBMsg.java
 ./com/bo/socket/market/BaseLevelData.java
 ./com/bo/socket/market/MDExecReport.java

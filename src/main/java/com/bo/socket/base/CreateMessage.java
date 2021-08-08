@@ -21,6 +21,7 @@ public class CreateMessage {
         REQUEST_MESSAGE_TYPES.put("m", RequestMessageTypes.MSG_FIVE_LEVEL_DATA);
         REQUEST_MESSAGE_TYPES.put("O", RequestMessageTypes.MSG_TEN_LEVEL_DATA);
         REQUEST_MESSAGE_TYPES.put("S", RequestMessageTypes.MSG_TWENTY_LEVEL_DATA);
+        REQUEST_MESSAGE_TYPES.put("U", RequestMessageTypes.MSG_THIRTY_LEVEL_DATA);
     }
 
     public static boolean isValidMessageType(String msgTypeKey) {

@@ -16,4 +16,5 @@ public class RequestMessageTypes {
     public static String MSG_FIVE_LEVEL_DATA = "five_level_data";
     public static String MSG_TEN_LEVEL_DATA = "ten_level_data";
     public static String MSG_TWENTY_LEVEL_DATA = "twenty_level_data";
+    public static String MSG_THIRTY_LEVEL_DATA = "thirty_level_data";
 }
