@@ -3,6 +3,7 @@
 ./com/bo/socket/base/SocketController.java
 ./com/bo/socket/base/Logger.java
 ./com/bo/socket/base/Message.java
+./com/bo/socket/base/BasePrice.java
 ./com/bo/socket/base/ServerController.java
 ./com/bo/socket/base/CreateMessage.java
 ./com/bo/socket/auth/InstrumentRequest.java
@@ -13,6 +14,7 @@
 ./com/bo/socket/instance/Server.java
 ./com/bo/socket/instance/Client.java
 ./com/bo/socket/trade/CollateralRequest.java
+./com/bo/socket/market/TOBMsg.java
 ./com/bo/socket/market/MDExecReport.java
 ./com/bo/socket/market/ThreeLevelData.java
 ./com/bo/socket/market/FiveLevelData.java

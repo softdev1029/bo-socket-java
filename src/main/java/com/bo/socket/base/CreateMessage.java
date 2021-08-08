@@ -16,6 +16,7 @@ public class CreateMessage {
         REQUEST_MESSAGE_TYPES.put("T", RequestMessageTypes.MSG_NEW_LIMIT_ORDER);
         REQUEST_MESSAGE_TYPES.put("s", RequestMessageTypes.MSG_MD_SUBSCRIBE);
         REQUEST_MESSAGE_TYPES.put("V", RequestMessageTypes.MSG_MD_EXEC_REPORT);
+        REQUEST_MESSAGE_TYPES.put("t", RequestMessageTypes.MSG_TOB_MSG);
         REQUEST_MESSAGE_TYPES.put("M", RequestMessageTypes.MSG_THREE_LEVEL_DATA);
         REQUEST_MESSAGE_TYPES.put("m", RequestMessageTypes.MSG_FIVE_LEVEL_DATA);
     }

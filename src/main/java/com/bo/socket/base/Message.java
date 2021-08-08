@@ -81,6 +81,12 @@ abstract public class Message {
     // Collateral Request
     public short UpdateType = 0;
 
+    // MDExecReport
+    public double Volume = 0;
+
+    // TOBMsg
+    public BasePrice LvlPrice = new BasePrice();
+
     // FiveLevelData
     public byte[] MarketDataSymbolName = new byte[12];
     public double LastTradePrice = 0;
@@ -92,9 +98,6 @@ abstract public class Message {
     public Price Lvl3Price = new Price();
     public Price Lvl4Price = new Price();
     public Price Lvl5Price = new Price();
-
-    // MDExecReport
-    public double Volume = 0;
 
     abstract public void createExampleMessage();
 

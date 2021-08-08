@@ -61,6 +61,8 @@ public class Instance {
                 msg = new MDSubscribe();
             } else if (msgTypeKey.equals("V")) {
                 msg = new MDExecReport();
+            } else if (msgTypeKey.equals("t")) {
+                msg = new TOBMsg();
             } else if (msgTypeKey.equals("M")) {
                 msg = new ThreeLevelData();
             } else if (msgTypeKey.equals("m")) {
