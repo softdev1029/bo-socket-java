@@ -12,4 +12,5 @@ public class MessageSymbol {
     public static byte THREE_LEVEL_DATA = 'M';
     public static byte FIVE_LEVEL_DATA = 'm';
     public static byte TEN_LEVEL_DATA = 'O';
+    public static byte TWENTY_LEVEL_DATA = 'S';
 }
