@@ -8,4 +8,5 @@ public class MessageSymbol {
     public static byte COLLATERAL_REQUEST = 'f';
     public static byte THREE_LEVEL_DATA = 'M';
     public static byte FIVE_LEVEL_DATA = 'm';
+    public static byte MD_SUBSCRIBE = 's';
 }

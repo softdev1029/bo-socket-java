@@ -68,6 +68,8 @@ public class SocketController {
                 msg = new ThreeLevelData();
             } else if (dataType == MessageSymbol.FIVE_LEVEL_DATA) {
                 msg = new FiveLevelData();
+            } else if (dataType == MessageSymbol.MD_SUBSCRIBE) {
+                msg = new MDSubscribe();
             }
             int error = msg.read(in);
             msg.print();

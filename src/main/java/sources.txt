@@ -15,6 +15,7 @@
 ./com/bo/socket/trade/CollateralRequest.java
 ./com/bo/socket/market/ThreeLevelData.java
 ./com/bo/socket/market/FiveLevelData.java
+./com/bo/socket/market/MDSubscribe.java
 ./com/bo/socket/transaction/NewLimitOrder.java
 ./com/bo/socket/constant/MessageTypes.java
 ./com/bo/socket/constant/MessageSymbol.java

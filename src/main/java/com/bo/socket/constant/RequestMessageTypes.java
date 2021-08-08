@@ -11,4 +11,5 @@ public class RequestMessageTypes {
     public static String MSG_NEW_LIMIT_ORDER = "new_limit_order";
     public static String MSG_THREE_LEVEL_DATA = "three_level_data";
     public static String MSG_FIVE_LEVEL_DATA = "five_level_data";
+    public static String MSG_MD_SUBSCRIBE = "md_subscribe";
 }
