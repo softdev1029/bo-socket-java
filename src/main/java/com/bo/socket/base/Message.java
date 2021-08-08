@@ -99,6 +99,10 @@ abstract public class Message {
     public Price Lvl4Price = new Price();
     public Price Lvl5Price = new Price();
 
+    // TenLevelData
+    public short StartLayer = 0;
+    public AtomPrice[] Prices = new AtomPrice[20];
+
     abstract public void createExampleMessage();
 
     public void makeByteBuffer() {

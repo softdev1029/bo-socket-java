@@ -67,7 +67,9 @@ public class Instance {
                 msg = new ThreeLevelData();
             } else if (msgTypeKey.equals("m")) {
                 msg = new FiveLevelData();
-            } 
+            } else if (msgTypeKey.equals("O")) {
+                msg = new TenLevelData();
+            }
             for (int i = 0; i < Integer.valueOf(msgCount); i++) {
                 msg.createExampleMessage();
                 sc.send(msg);

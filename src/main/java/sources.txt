@@ -1,6 +1,7 @@
 ./com/bo/socket/util/Util.java
 ./com/bo/socket/base/Price.java
 ./com/bo/socket/base/SocketController.java
+./com/bo/socket/base/AtomPrice.java
 ./com/bo/socket/base/Logger.java
 ./com/bo/socket/base/Message.java
 ./com/bo/socket/base/BasePrice.java
@@ -19,6 +20,7 @@
 ./com/bo/socket/market/ThreeLevelData.java
 ./com/bo/socket/market/FiveLevelData.java
 ./com/bo/socket/market/MDSubscribe.java
+./com/bo/socket/market/TenLevelData.java
 ./com/bo/socket/transaction/NewLimitOrder.java
 ./com/bo/socket/constant/MessageTypes.java
 ./com/bo/socket/constant/MessageSymbol.java

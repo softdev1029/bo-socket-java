@@ -11,4 +11,5 @@ public class MessageSymbol {
     public static byte TOB_MSG = 't';
     public static byte THREE_LEVEL_DATA = 'M';
     public static byte FIVE_LEVEL_DATA = 'm';
+    public static byte TEN_LEVEL_DATA = 'O';
 }

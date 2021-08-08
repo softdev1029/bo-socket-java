@@ -74,7 +74,9 @@ public class SocketController {
                 msg = new ThreeLevelData();
             } else if (dataType == MessageSymbol.FIVE_LEVEL_DATA) {
                 msg = new FiveLevelData();
-            } 
+            } else if (dataType == MessageSymbol.TEN_LEVEL_DATA) {
+                msg = new TenLevelData();
+            }
             int error = msg.read(in);
             msg.print();
             var isValid = msg.validate();
