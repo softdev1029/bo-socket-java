@@ -93,6 +93,9 @@ abstract public class Message {
     public Price Lvl4Price = new Price();
     public Price Lvl5Price = new Price();
 
+    // MDExecReport
+    public double Volume = 0;
+
     abstract public void createExampleMessage();
 
     public void makeByteBuffer() {

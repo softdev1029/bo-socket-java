@@ -64,13 +64,15 @@ public class SocketController {
                 msg = new RiskUpdateRequest();
             } else if (dataType == MessageSymbol.COLLATERAL_REQUEST) {
                 msg = new CollateralRequest();
+            } else if (dataType == MessageSymbol.MD_SUBSCRIBE) {
+                msg = new MDSubscribe();
+            } else if (dataType == MessageSymbol.MD_EXEC_REPORT) {
+                msg = new MDExecReport();
             } else if (dataType == MessageSymbol.THREE_LEVEL_DATA) {
                 msg = new ThreeLevelData();
             } else if (dataType == MessageSymbol.FIVE_LEVEL_DATA) {
                 msg = new FiveLevelData();
-            } else if (dataType == MessageSymbol.MD_SUBSCRIBE) {
-                msg = new MDSubscribe();
-            }
+            } 
             int error = msg.read(in);
             msg.print();
             var isValid = msg.validate();

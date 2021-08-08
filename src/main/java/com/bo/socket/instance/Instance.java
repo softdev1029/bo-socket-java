@@ -57,13 +57,15 @@ public class Instance {
                 msg = new RiskUpdateRequest();
             } else if (msgTypeKey.equals("f")) {
                 msg = new CollateralRequest();
+            } else if (msgTypeKey.equals("s")) {
+                msg = new MDSubscribe();
+            } else if (msgTypeKey.equals("V")) {
+                msg = new MDExecReport();
             } else if (msgTypeKey.equals("M")) {
                 msg = new ThreeLevelData();
             } else if (msgTypeKey.equals("m")) {
                 msg = new FiveLevelData();
-            } else if (msgTypeKey.equals("s")) {
-                msg = new MDSubscribe();
-            }
+            } 
             for (int i = 0; i < Integer.valueOf(msgCount); i++) {
                 msg.createExampleMessage();
                 sc.send(msg);
