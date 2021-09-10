@@ -42,35 +42,34 @@ public class Example extends Instance {
         return "";
     }
 
+    public String sendCallback(SocketController sc) {
+        if (processState == "send_logon") {
+            Message msg = new ClientLogon();
+            createExampleLogon(msg);
+            sc.send(msg);
+            println("Sending logon ...");
+            processState = "recv_logon";
+        } else if (processState == "send_order") {
+            Message msg = new NewLimitOrder();
+            createExampleOrder(msg);
+            sc.send(msg);
+            println("Sending order ...");
+            processState = "recv_order_reply";
+        } else if (processState == "send_logout") {
+            Message msg = new ClientLogon();
+            createExampleLogout(msg);
+            sc.send(msg);
+            println("Sending logout ...");
+            processState = "exit";
+        }
+        return "";
+    }
+
     public void runExample(String ip, int port) {
         sc = new SocketController();
         sc.create(ip, port, this::recvCallback);
-
-        while (true) {
-            while (sc.isReadable()) {
-                sc.read();
-            }
-            
-            if (processState == "send_logon") {
-                Message msg = new ClientLogon();
-                createExampleLogon(msg);
-                sc.send(msg);
-                println("Sending logon ...");
-                processState = "recv_logon";
-            } else if (processState == "send_order") {
-                Message msg = new NewLimitOrder();
-                createExampleOrder(msg);
-                sc.send(msg);
-                println("Sending order ...");
-                processState = "recv_order_reply";
-            } else if (processState == "send_logout") {
-                Message msg = new ClientLogon();
-                createExampleLogout(msg);
-                sc.send(msg);
-                println("Sending logout ...");
-                processState = "exit";
-            }
-        }
+        SocketThread st = new SocketThread(sc, this::sendCallback);
+        st.start();
     }
 
     public void createExampleLogon(Message msg) {
