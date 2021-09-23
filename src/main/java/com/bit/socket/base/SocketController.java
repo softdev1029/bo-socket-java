@@ -15,12 +15,15 @@ public class SocketController {
     protected DataInputStream in = null;
     protected DataOutputStream out = null;
     protected Function<Message, String> recvCallback = null;
+    protected String apiKey = null;
 
     public void createServer(int port, Function<Message, String> callback) {
     }
 
-    public void create(String ip, int port, Function<Message, String> callback) {
+    public void create(String ip, int port, String apiKey, Function<Message, String> callback) {
         try {
+            this.apiKey = apiKey;
+
             socket = new Socket(ip, port);
             Logger.logln("Connected to server ...");
 
@@ -52,9 +55,9 @@ public class SocketController {
             Logger.logln("Type: " + dataType);
             Logger.logln("Length:" + length);
 
-            Message msg = new ClientLogon();
+            Message msg = new ClientLogon(null);
             if (dataType == MessageSymbol.CLIENT_LOGON) {
-                msg = new ClientLogon();
+                msg = new ClientLogon(null);
             } else if (dataType == MessageSymbol.NEW_LIMIT_ORDER) {
                 msg = new NewLimitOrder();
             } else if (dataType == MessageSymbol.INSTRUMENT_REQUEST) {

@@ -5,17 +5,22 @@ import com.bit.socket.base.*;
 import com.bit.socket.constant.*;
 
 public class ClientLogon extends Message {
-    public ClientLogon() {
+    protected String apiKey = null;
+
+    public ClientLogon(String apiKey) {
+        this.apiKey = apiKey != null ? apiKey : "1234";
         MessageTypeStr = "ClientLogon";
         MessageLen = 143;
     }
 
     public void createExampleMessage() {
+        String twoFa = Oauth.getTOTPCode(apiKey);
+
         Data1 = 'H';
         Data2 = 0;
         LogonType = 1;
         Account = 100700;
-        TwoFA = "1F6A".getBytes();
+        TwoFA = twoFa.getBytes();
         UserName = "BOU7".getBytes();
         TradingSessionID = 506;
         PrimaryOrderEntryIP = "1".getBytes();

@@ -10,7 +10,7 @@ public class Client extends Instance {
 
     public void runClient(String ip, int port) {
         sc = new SocketController();
-        sc.create(ip, port, this::recvCallback);
+        sc.create(ip, port, null, this::recvCallback);
 
         super.runInstance();
     }

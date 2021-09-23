@@ -36,7 +36,7 @@ public class Server extends Instance {
             }
 
             if (processState == "send_logon_reply") {
-                Message msg = new ClientLogon();
+                Message msg = new ClientLogon(null);
                 createExampleLogonReply(msg);
                 sc.send(msg);
                 println("Sending logon reply ...");

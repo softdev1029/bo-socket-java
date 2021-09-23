@@ -1,12 +1,16 @@
 package com.bit.socket.instance;
 
 import com.bit.socket.base.*;
+
+import java.util.Scanner;
+
 import com.bit.socket.auth.*;
 import com.bit.socket.transaction.*;
 import com.bit.socket.constant.*;
 
 public class Example extends Instance {
     String processState = "send_logon";
+    String apiKey = null;
 
     public void println(String msg) {
         System.out.println(msg);
@@ -38,7 +42,7 @@ public class Example extends Instance {
 
     public String sendCallback(SocketController sc) {
         if (processState == "send_logon") {
-            Message msg = new ClientLogon();
+            Message msg = new ClientLogon(apiKey);
             createExampleLogon(msg);
             sc.send(msg);
             println("Sending logon ...");
@@ -50,7 +54,7 @@ public class Example extends Instance {
             println("Sending order ...");
             processState = "recv_order_reply";
         } else if (processState == "send_logout") {
-            Message msg = new ClientLogon();
+            Message msg = new ClientLogon(apiKey);
             createExampleLogout(msg);
             sc.send(msg);
             println("Sending logout ...");
@@ -59,9 +63,10 @@ public class Example extends Instance {
         return "";
     }
 
-    public void runExample(String ip, int port) {
+    public void runExample(String ip, int port, String apiKey) {
+        this.apiKey = apiKey;
         sc = new SocketController();
-        sc.create(ip, port, this::recvCallback);
+        sc.create(ip, port, apiKey, this::recvCallback);
         SocketThread st = new SocketThread(sc, this::sendCallback);
         st.start();
     }
@@ -149,16 +154,27 @@ public class Example extends Instance {
     }
 
     public static void main(String[] args) {
-        if (args.length != 2) {
-            Logger.logf("usage: <host> <port>\n");
-            return;
-        }
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a valid server IP address: ");
+        String ip = scanner.nextLine();
+        System.out.println("Enter a valid server Port number: ");
+        int port = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter a valid API Trading Key: ");
+        String apiKey = scanner.nextLine();
+        scanner.close();
 
         Example example = new Example();
 
-        String ip = args[0];
-        int port = Integer.parseInt(args[1]);
-        example.runExample(ip, port);
+        example.runExample(ip, port, apiKey);
+
+        while (true) {
+            String code = Oauth.getTOTPCode(apiKey);
+            System.out.println(code);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+        }
     }
 
 }

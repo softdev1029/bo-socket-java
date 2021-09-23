@@ -42,9 +42,9 @@ public class Instance {
 
                 Logger.logln("Message count is: " + msgCount);
 
-                Message msg = new ClientLogon();
+                Message msg = new ClientLogon(null);
                 if (msgTypeKey.equals("H")) {
-                    msg = new ClientLogon();
+                    msg = new ClientLogon(null);
                 } else if (msgTypeKey.equals("T")) {
                     msg = new NewLimitOrder();
                 } else if (msgTypeKey.equals("Y")) {
