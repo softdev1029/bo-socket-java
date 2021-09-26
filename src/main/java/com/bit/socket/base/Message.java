@@ -54,6 +54,9 @@ abstract public class Message {
     public int MsgSeqNum = 0;
     public double TakeProfitPrice = 0;
     public short TriggerType = 0;
+    public double SecondLegPrice = 0;
+    public short RouteEnum = 0;
+    public short ModifyType = 0;
     public byte[] Attributes = new byte[12];
 
     // Client Logon

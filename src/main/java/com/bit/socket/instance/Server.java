@@ -110,6 +110,9 @@ public class Server extends Instance {
         msg.MsgSeqNum = 79488880;
         msg.TakeProfitPrice = 0;
         msg.TriggerType = 0;
+        msg.SecondLegPrice = 111;
+        msg.RouteEnum = 1;
+        msg.ModifyType = 1;
         msg.Attributes = "".getBytes();
     }
 

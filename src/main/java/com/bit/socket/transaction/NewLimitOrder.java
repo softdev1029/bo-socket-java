@@ -51,6 +51,9 @@ public class NewLimitOrder extends Message {
         MsgSeqNum = 79488880;
         TakeProfitPrice = 0;
         TriggerType = 0;
+        SecondLegPrice = 111;
+        RouteEnum = 1;
+        ModifyType = 1;
         Attributes = "".getBytes();
     }
 
@@ -65,7 +68,8 @@ public class NewLimitOrder extends Message {
                 .putShort(RejectReason).putLong(SendingTime).putInt(TradingSessionID).putInt(Key).putDouble(DisplaySize)
                 .putDouble(RefreshSize).putShort(Layers).putDouble(SizeIncrement).putDouble(PriceIncrement)
                 .putDouble(PriceOffset).putDouble(BOOrigPrice).putDouble(ExecPrice).putInt(MsgSeqNum)
-                .putDouble(TakeProfitPrice).putShort(TriggerType).put(Attributes);
+                .putDouble(TakeProfitPrice).putShort(TriggerType).putDouble(SecondLegPrice).putShort(RouteEnum)
+                .putShort(ModifyType).put(Attributes);
     }
 
     public int read(DataInputStream in) {
@@ -110,6 +114,9 @@ public class NewLimitOrder extends Message {
         MsgSeqNum = byteBuffer.getInt();
         TakeProfitPrice = byteBuffer.getDouble();
         TriggerType = byteBuffer.getShort();
+        SecondLegPrice = byteBuffer.getDouble();
+        RouteEnum = byteBuffer.getShort();
+        ModifyType = byteBuffer.getShort();
         byteBuffer.get(Attributes);
 
         return ReadError.NO_ERROR;
@@ -152,6 +159,9 @@ public class NewLimitOrder extends Message {
         Logger.logln("MsgSeqNum: " + MsgSeqNum);
         Logger.logln("TakeProfitPrice: " + TakeProfitPrice);
         Logger.logln("TriggerType: " + TriggerType);
+        Logger.logln("TriggerType: " + SecondLegPrice);
+        Logger.logln("TriggerType: " + RouteEnum);
+        Logger.logln("TriggerType: " + ModifyType);
         Logger.logln("Attributes: " + new String(Attributes));
     }
 }
